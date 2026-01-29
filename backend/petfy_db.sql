@@ -1,4 +1,4 @@
-
+DROP DATABASE IF EXISTS petfy_db;
 CREATE DATABASE petfy_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 /*
     utf8mb4 conjunto de caracteres que vamos a usar
