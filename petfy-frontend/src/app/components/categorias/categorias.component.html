@@ -1,0 +1,16 @@
+<div class="container mt-4">
+  <h2><i class="bi bi-tags"></i> Categorías</h2>
+  <div *ngIf="cargando" class="text-center"><div class="spinner-border text-primary"></div></div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  <div class="row mt-4" *ngIf="!cargando && !error">
+    <div class="col-md-4 mb-3" *ngFor="let categoria of categorias">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><i class="bi bi-tag-fill text-primary"></i> {{ categoria.nombre }}</h5>
+          <p class="card-text text-muted">{{ categoria.descripcion }}</p>
+          <a routerLink="/productos" class="btn btn-outline-primary">Ver Productos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

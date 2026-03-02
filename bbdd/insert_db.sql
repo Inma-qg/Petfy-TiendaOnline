@@ -76,3 +76,17 @@ INSERT INTO detalle_pedido (pedido_id, producto_id, cantidad, precio_unitario, s
 (2, 4, 1, 65.99, 65.99); 
 
 
+/*algunas consultas*/
+/* Ver resumen de productos por categoría*/
+SELECT c.nombre AS categoria, COUNT(p.id) AS num_productos, AVG(p.precio) AS precio_medio
+FROM categorias c
+LEFT JOIN productos p ON c.id = p.categoria_id
+WHERE c.categoria_padre_id IS NULL
+GROUP BY c.id, c.nombre
+ORDER BY num_productos DESC;
+  
+/* Ver pedidos recientes*/
+SELECT p.id, u.nombre, p.fecha_pedido, p.estado, p.total
+FROM pedidos p
+JOIN usuarios u ON p.usuario_id = u.id
+ORDER BY p.fecha_pedido DESC;

@@ -1,0 +1,66 @@
+<div class="container mt-4">
+  <h2><i class="bi bi-box-seam"></i> Nuestros Productos</h2>
+  
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="input-group">
+        <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Buscar productos..." 
+          [(ngModel)]="busqueda"
+          (keyup)="buscar()">
+        <button class="btn btn-primary" type="button" (click)="buscar()">
+          <i class="bi bi-search"></i> Buscar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="cargando" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+    <p class="mt-2">Cargando productos...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    <i class="bi bi-exclamation-triangle"></i> {{ error }}
+  </div>
+
+  <div class="row" *ngIf="!cargando && !error">
+    <div class="col-md-4 mb-4" *ngFor="let producto of productosFiltrados">
+      <div class="card h-100">
+        <img 
+          [src]="producto.imagenUrl || 'assets/placeholder.jpg'" 
+          class="card-img-top" 
+          alt="{{ producto.nombre }}"
+          style="height: 200px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">{{ producto.nombre }}</h5>
+          <p class="card-text text-muted">
+            {{ producto.descripcion.substring(0, 100) }}...
+          </p>
+          <p class="card-text">
+            <strong class="text-primary">{{ producto.precio | currency:'EUR' }}</strong>
+          </p>
+          <span class="badge bg-success" *ngIf="producto.stock > 0">
+            En stock: {{ producto.stock }}
+          </span>
+          <span class="badge bg-danger" *ngIf="producto.stock === 0">
+            Sin stock
+          </span>
+        </div>
+        <div class="card-footer">
+          <a [routerLink]="['/productos', producto.id]" class="btn btn-primary w-100">
+            <i class="bi bi-eye"></i> Ver Detalles
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!cargando && !error && productosFiltrados.length === 0" class="alert alert-info">
+    <i class="bi bi-info-circle"></i> No se encontraron productos.
+  </div>
+</div>
