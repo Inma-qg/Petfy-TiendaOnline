@@ -1,0 +1,7 @@
+footer a {
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: #0d6efd !important;
+}

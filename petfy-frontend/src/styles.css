@@ -1,0 +1,38 @@
+/* Estilos globales de PETFY */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+  transition: transform 0.2s;
+  border: 1px solid #dee2e6;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+footer a {
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: #0d6efd !important;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
