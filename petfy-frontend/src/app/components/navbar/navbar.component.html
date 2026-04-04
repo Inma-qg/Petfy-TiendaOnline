@@ -23,10 +23,57 @@
             <i class="bi bi-tags"></i> Categorías
           </a>
         </li>
+        
+        <!-- CARRITO (siempre visible) -->
         <li class="nav-item">
-          <a class="nav-link" routerLink="/acerca-de" routerLinkActive="active">
-            <i class="bi bi-info-circle"></i> Acerca de
+          <a class="nav-link position-relative" routerLink="/carrito" routerLinkActive="active">
+            <i class="bi bi-cart3"></i> Carrito
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" *ngIf="cantidadCarrito > 0">
+              {{ cantidadCarrito }}
+            </span>
           </a>
+        </li>
+
+        <!-- SI NO ESTÁ LOGUEADO -->
+        <li class="nav-item" *ngIf="!usuarioLogueado">
+          <a class="nav-link" routerLink="/login">
+            <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
+          </a>
+        </li>
+
+        <!-- SI SÍ ESTÁ LOGUEADO -->
+        <li class="nav-item" *ngIf="usuarioLogueado">
+          <div class="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" (click)="toggleDropdown()" id="userDropdown">
+              <i class="bi bi-person-circle"></i> {{ usuarioLogueado.nombre }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" [class.show]="dropdownAbierto">
+              <li>
+                <a class="dropdown-item" routerLink="/perfil" (click)="cerrarDropdown()">
+                  <i class="bi bi-person"></i> Mi Perfil
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/pedidos" (click)="cerrarDropdown()">
+                  <i class="bi bi-box"></i> Mis Pedidos
+                </a>
+              </li>
+              <li *ngIf="usuarioLogueado.rol === 'ADMIN'">
+                <hr class="dropdown-divider">
+              </li>
+              <li *ngIf="usuarioLogueado.rol === 'ADMIN'">
+                <a class="dropdown-item" routerLink="/admin" (click)="cerrarDropdown()">
+                  <i class="bi bi-speedometer2"></i> Panel Admin
+                </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item text-danger" href="#" (click)="logout(); $event.preventDefault()">
+                  <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                </a>
+              </li>
+            </ul>
+          </div>
         </li>
       </ul>
     </div>

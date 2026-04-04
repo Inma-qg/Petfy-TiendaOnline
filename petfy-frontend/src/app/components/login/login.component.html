@@ -1,0 +1,88 @@
+<!-- src/app/components/login/login.component.html -->
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="card shadow">
+        <div class="card-body p-5">
+          
+          <!-- Logo/Título -->
+          <div class="text-center mb-4">
+            <i class="bi bi-shop" style="font-size: 3rem; color: #0d6efd;"></i>
+            <h3 class="mt-3">Bienvenido a PETFY</h3>
+            <p class="text-muted">Inicia sesión para continuar</p>
+          </div>
+
+          <!-- Mensaje de error -->
+          <div *ngIf="error" class="alert alert-danger" role="alert">
+            <i class="bi bi-exclamation-triangle"></i> {{ error }}
+          </div>
+
+          <!-- Formulario -->
+          <form (ngSubmit)="login()">
+            
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">
+                <i class="bi bi-envelope"></i> Email
+              </label>
+              <input 
+                type="email" 
+                class="form-control" 
+                id="email"
+                [(ngModel)]="email" 
+                name="email"
+                placeholder="tu@email.com"
+                required
+                [disabled]="cargando">
+            </div>
+
+            <!-- Contraseña -->
+            <div class="mb-3">
+              <label for="password" class="form-label">
+                <i class="bi bi-lock"></i> Contraseña
+              </label>
+              <input 
+                type="password" 
+                class="form-control" 
+                id="password"
+                [(ngModel)]="password" 
+                name="password"
+                placeholder="Tu contraseña"
+                required
+                [disabled]="cargando">
+            </div>
+
+            <!-- Botón de login -->
+            <div class="d-grid gap-2 mb-3">
+              <button 
+                type="submit" 
+                class="btn btn-primary btn-lg"
+                [disabled]="cargando">
+                <span *ngIf="!cargando">
+                  <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
+                </span>
+                <span *ngIf="cargando">
+                  <span class="spinner-border spinner-border-sm" role="status"></span>
+                  Iniciando sesión...
+                </span>
+              </button>
+            </div>
+
+            <!-- Link a registro -->
+            <div class="text-center">
+              <p class="text-muted">
+                ¿No tienes cuenta? 
+                <a href="#" (click)="irARegistro(); $event.preventDefault()" class="text-primary">
+                  Regístrate aquí
+                </a>
+              </p>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

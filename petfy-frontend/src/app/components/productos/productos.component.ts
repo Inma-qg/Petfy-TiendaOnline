@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../../services/producto.service';
 import { Producto } from '../../models/producto.model';
+import { CarritoService } from '../../services/carrito.service';
 
 @Component({
   selector: 'app-productos',
@@ -14,7 +15,9 @@ export class ProductosComponent implements OnInit {
   error: string = '';
   busqueda: string = '';
 
-  constructor(private productoService: ProductoService) { }
+  constructor(
+    private productoService: ProductoService,
+    private carritoService: CarritoService) { }
 
   ngOnInit(): void {
     this.cargarProductos();
@@ -44,5 +47,10 @@ export class ProductosComponent implements OnInit {
         p.nombre.toLowerCase().includes(this.busqueda.toLowerCase())
       );
     }
+  }
+
+  agregarAlCarrito(producto: any): void {
+    this.carritoService.agregarProducto(producto, 1);
+    alert(`${producto.nombre} añadido al carrito`);
   }
 }

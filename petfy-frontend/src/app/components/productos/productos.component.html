@@ -52,9 +52,17 @@
           </span>
         </div>
         <div class="card-footer">
-          <a [routerLink]="['/productos', producto.id]" class="btn btn-primary w-100">
-            <i class="bi bi-eye"></i> Ver Detalles
-          </a>
+          <div class="d-grid gap-2">
+             <a [routerLink]="['/productos', producto.id]" class="btn btn-outline-primary btn-sm">
+               <i class="bi bi-eye"></i> Ver Detalles
+             </a>
+             <button 
+               class="btn btn-primary btn-sm" 
+               (click)="agregarAlCarrito(producto)"
+               [disabled]="producto.stock === 0">
+               <i class="bi bi-cart-plus"></i> Añadir al Carrito
+             </button>
+         </div>
         </div>
       </div>
     </div>
