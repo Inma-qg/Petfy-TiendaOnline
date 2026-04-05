@@ -12,6 +12,7 @@ import { CarritoService } from '../../services/carrito.service';
 export class NavbarComponent implements OnInit {
   usuarioLogueado: any = null;
   dropdownAbierto: boolean = false;
+  menuColapsado: boolean = true; // <--- Nueva variable
   cantidadCarrito: number = 0;
 
   constructor(
@@ -31,6 +32,13 @@ export class NavbarComponent implements OnInit {
       this.cantidadCarrito = items.reduce((total, item) => total + item.cantidad, 0);
     });
   }
+
+// Nueva función para alternar el menú en móviles
+  toggleMenu(): void {
+    this.menuColapsado = !this.menuColapsado;
+  }
+  //hasta aqui
+
 
   toggleDropdown(): void {
     this.dropdownAbierto = !this.dropdownAbierto;

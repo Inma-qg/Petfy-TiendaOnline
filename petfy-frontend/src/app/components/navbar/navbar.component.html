@@ -3,30 +3,35 @@
     <a class="navbar-brand" routerLink="/">
       <i class="bi bi-shop"></i> PETFY
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="!menuColapsado">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+
+    <div class="collapse navbar-collapse" [class.show]="!menuColapsado" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="menuColapsado = true">
             <i class="bi bi-house-door"></i> Inicio
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/productos" routerLinkActive="active">
+          <a class="nav-link" routerLink="/productos" routerLinkActive="active" (click)="menuColapsado = true">
             <i class="bi bi-box-seam"></i> Productos
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/categorias" routerLinkActive="active">
+          <a class="nav-link" routerLink="/categorias" routerLinkActive="active" (click)="menuColapsado = true">
             <i class="bi bi-tags"></i> Categorías
           </a>
         </li>
         
-        <!-- CARRITO (siempre visible) -->
         <li class="nav-item">
-          <a class="nav-link position-relative" routerLink="/carrito" routerLinkActive="active">
+          <a class="nav-link position-relative" routerLink="/carrito" routerLinkActive="active" (click)="menuColapsado = true">
             <i class="bi bi-cart3"></i> Carrito
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" *ngIf="cantidadCarrito > 0">
               {{ cantidadCarrito }}
@@ -34,14 +39,12 @@
           </a>
         </li>
 
-        <!-- SI NO ESTÁ LOGUEADO -->
         <li class="nav-item" *ngIf="!usuarioLogueado">
-          <a class="nav-link" routerLink="/login">
+          <a class="nav-link" routerLink="/login" (click)="menuColapsado = true">
             <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
           </a>
         </li>
 
-        <!-- SI SÍ ESTÁ LOGUEADO -->
         <li class="nav-item" *ngIf="usuarioLogueado">
           <div class="dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" (click)="toggleDropdown()" id="userDropdown">
