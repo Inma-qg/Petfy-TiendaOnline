@@ -1,0 +1,30 @@
+/* src/app/components/perfil/perfil.component.css */
+
+.card {
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.list-group-item {
+  cursor: pointer;
+  border-left: 3px solid transparent;
+}
+
+.list-group-item.active {
+  border-left-color: #0d6efd;
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa;
+}
+
+label.text-muted {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+p.fw-bold {
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}

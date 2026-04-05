@@ -1,0 +1,33 @@
+/* src/app/components/admin/admin.component.css */
+
+.sidebar {
+  min-height: calc(100vh - 60px);
+  padding: 0;
+}
+
+.sidebar .nav-link {
+  color: #333;
+  padding: 10px 15px;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #e9ecef;
+}
+
+.sidebar .nav-link.active {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.table {
+  background-color: white;
+}
+
+.badge {
+  padding: 5px 10px;
+}

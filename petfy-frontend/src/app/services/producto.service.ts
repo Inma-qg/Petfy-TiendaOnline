@@ -22,7 +22,22 @@ export class ProductoService {
   buscarPorNombre(nombre: string): Observable<Producto[]> {
     return this.http.get<Producto[]>(`${this.apiUrl}/buscar?nombre=${nombre}`);
   }
+  filtrar(params: any): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/filtrar`, { params });
+  }
 
+  create(producto: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, producto);
+  }
+
+  update(id: number, producto: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, producto);
+  }
+
+  delete(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  }
+  
   filtrarPorCategoria(categoriaId: number): Observable<Producto[]> {
     return this.http.get<Producto[]>(`${this.apiUrl}/filtrar?categoriaId=${categoriaId}`);
   }

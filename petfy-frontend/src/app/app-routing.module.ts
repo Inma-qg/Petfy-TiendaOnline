@@ -8,6 +8,8 @@ import { AcercaDeComponent } from './components/acerca-de/acerca-de.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +19,8 @@ const routes: Routes = [
   { path: 'productos/:id', component: ProductoDetalleComponent },
   { path: 'categorias', component: CategoriasComponent },
   { path: 'carrito', component: CarritoComponent },
+  { path: 'admin', component: AdminComponent },
+  { path: 'perfil', component: PerfilComponent },
   { path: 'acerca-de', component: AcercaDeComponent },
   { path: '**', redirectTo: '' }
 ];
