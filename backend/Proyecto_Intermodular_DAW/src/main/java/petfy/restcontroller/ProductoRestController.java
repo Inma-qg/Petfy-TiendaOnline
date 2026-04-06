@@ -41,7 +41,7 @@ public class ProductoRestController {
 	    }
 	
 	 /*
-	  * GET /api/productos/buscar?nombre=xxx
+	  * GET /productos/buscar?nombre=xxx
 	  * Buscar productos por nombre
 	  */
 	    @GetMapping("/buscar")

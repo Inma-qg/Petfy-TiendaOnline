@@ -30,11 +30,7 @@ public class CategoriaRestController {
 	
 	private final CategoriaService cService;
 
-   /* CategoriaRestController(CategoriaServiceImpl categoriaServiceImpl) {
-        this.categoriaServiceImpl = categoriaServiceImpl;
-		this.cService = null;
-    }
-    */
+
 	
 	@GetMapping
     public ResponseEntity<List<Categoria>> obtenerTodas() {

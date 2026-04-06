@@ -69,7 +69,7 @@ public class UsuarioRestController {
      */
     @PostMapping("/registro")
     public ResponseEntity<Usuario> registrar(@Valid @RequestBody Usuario usuario) {
-        Usuario nuevoUsuario = uService.registrar(usuario);
+        Usuario nuevoUsuario = uService.crear(usuario);
         
         // No devolver la contraseña en la respuesta
         nuevoUsuario.setPassword(null);

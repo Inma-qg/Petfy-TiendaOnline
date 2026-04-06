@@ -1,5 +1,7 @@
 package petfy.modelo.service;
 
+import java.time.LocalDateTime;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +14,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import petfy.modelo.entities.Usuario;
+import petfy.modelo.entities.Usuario.Rol;
 import petfy.modelo.repository.UsuarioRepository;
 
 @Service
 @Primary
 public class UsuarioServiceImpl implements UsuarioService, UserDetailsService{
 
-
+	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 
@@ -36,21 +40,7 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService{
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
     }
 
-	@Override
-	public Usuario registrar(Usuario usuario) {
-		if (existeEmail(usuario.getEmail())) {
-			throw new IllegalArgumentException("El email ya está registrado");
-	        }
-	        validarUsuario(usuario);
-	        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-
-	    if (usuario.getRol() == null) {
-	            usuario.setRol(Usuario.Rol.CLIENTE);
-	        }
-
-	        return usuarioRepository.save(usuario);
-	    }
-
+	
 	
 	@Override
 	public Usuario actualizarPerfil(Integer id, Usuario usuarioActualizado) {
@@ -82,7 +72,7 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService{
 	@Override
 	public Usuario buscarPorEmail(String email) {
 	    return usuarioRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con email: " + email));
+                .orElse(null);
     }
 
 	@Override
@@ -117,9 +107,23 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService{
 	            .roles(usuario.getRol().name())
 	            .build();
 	}
-	
-	
-	
-	
 
+	@Override
+	public Usuario crear(Usuario usuario) {
+        // Cifrar la contraseña antes de guardar
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        
+        // Establecer valores por defecto
+        usuario.setActivo(true);
+        usuario.setFechaRegistro(LocalDateTime.now());
+        
+        // Por defecto es CLIENTE (no ADMIN)
+        if (usuario.getRol() == null) {
+            usuario.setRol(Rol.CLIENTE);
+        }
+        
+        return usuarioRepository.save(usuario);
+    }
+	
+	
 }
